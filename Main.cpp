@@ -12,9 +12,6 @@ void bubbleSort(int arr[]) {
     //increment index
     //repeat with -1 smaller size
     //repeat until all numbers are sorted
-
-    int x = 0;
-    int y = 1;
 }
 
 // Merge Sort - Gary
