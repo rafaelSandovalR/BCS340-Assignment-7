@@ -14,6 +14,7 @@ void bubbleSort(int arr[]) {
     //repeat until all numbers are sorted
 
     int x = 0;
+    int y = 2;
 }
 
 // Merge Sort - Gary
