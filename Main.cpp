@@ -14,6 +14,7 @@ void bubbleSort(int arr[]) {
     //repeat until all numbers are sorted
 
     int x = 0;
+    int y = 1;
 }
 
 // Merge Sort - Gary
@@ -21,7 +22,6 @@ void bubbleSort(int arr[]) {
 // Quick Sort - Brian
 
 // Heap Sort - Raf
-//test 123
 
 // Display Menu
 void displayMenu() {
