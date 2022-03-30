@@ -89,7 +89,7 @@ int main() {
         break;
     case 2:;
         break;
-    case 3:;
+    case 3: bubbleSort(numList); // added directly to main branch
         break;
     case 4:;
         break;
