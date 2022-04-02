@@ -38,7 +38,8 @@ void merge(int arr[], int l, int m, int r)
     int n2 =  r - m; 
   
     /* create temp arrays */
-    int L[n1], R[n2]; 
+    int* L = new int[n1];
+    int* R = new int[n2];
   
     /* Copy data to temp arrays L[] and R[] */
     for (i = 0; i < n1; i++) 
@@ -82,6 +83,7 @@ void merge(int arr[], int l, int m, int r)
         j++; 
         k++; 
     } 
+    delete[] L, R;
 } 
   
 /* l is for left index and r is right index of the 
@@ -174,7 +176,7 @@ int main() {
     int const size = 1000;
     int numList[size];
     int numListBackup[size];
-    int userChoice;
+    int userChoice = 0;
     double t1, t2;
   
     randomize(numList, size);
