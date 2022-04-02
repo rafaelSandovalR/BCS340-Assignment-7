@@ -215,9 +215,7 @@ int main() {
             t1 = TimeSnap();
             mergeSort(numList, 0, size - 1);
             t2 = TimeSnap();
-            cout << "\n-----***Array after Sort***-----" << endl;
-            printArray(numList);
-            cout << "Run Time: " << fixed << t2 - t1 << endl;
+            printSortAnalysis(numList, t1, t2);
           break;
           case 6:; // Quick sort gets called here
           break;
