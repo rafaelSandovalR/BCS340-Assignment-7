@@ -108,6 +108,43 @@ void mergeSort(int arr[], int l, int r)
 
 // Heap Sort - Raf
 
+void maxHeapify(int nodeIndex, int heapArray[], int size) {
+    int largest = nodeIndex;
+    int left = (2 * nodeIndex) + 1;
+    int right = (2 * nodeIndex) + 2;
+
+    if (left < size && heapArray[left] > heapArray[largest]) {
+        largest = left;
+    }
+
+    if (right < size && heapArray[right] > heapArray[largest]) {
+        largest = right;
+    }
+
+    if (largest != nodeIndex) {
+        int temp = heapArray[nodeIndex];
+        heapArray[nodeIndex] = heapArray[largest];
+        heapArray[largest] = temp;
+
+        maxHeapify(largest, heapArray, size);
+    }
+}
+
+
+void heapSort(int arr[], int size) {
+    // Turn array into a heap
+    for (int i = (size / 2) - 1; i >= 0; i--) {
+        maxHeapify(i, arr, size);
+    }
+    // Turn heap into sorted array
+    for (int i = size - 1; i > 0; i--) {
+        int temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+        maxHeapify(0, arr, i);
+    }
+}
+
 // Display Menu 
 void displayMenu() {
     cout << "\n----- Sorting Menu -----" << endl;
@@ -212,7 +249,7 @@ int main() {
           break;
           case 6:; // Quick sort gets called here
           break;
-          case 7: // Heap sort gets called here
+          case 7: heapSort(numList, size);// Heap sort gets called here
           break;
           case 8: 
             ResetArray(numList, numListBackup, size);
