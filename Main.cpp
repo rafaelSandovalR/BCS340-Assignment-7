@@ -22,12 +22,18 @@ void selectionSort(int a[] , int size) {
 // Insertion Sort - Brian
 
 // Bubble Sort - Raf
-void bubbleSort(int arr[]) {
-    //compare left item to right item
-    //if left item is larger, swap
-    //increment index
-    //repeat with -1 smaller size
-    //repeat until all numbers are sorted
+void bubbleSort(int arr[], int size) {
+    int outer, inner, temp; 
+
+    for (outer = size - 1; outer > 0; outer--) {    // Counting Down
+        for (inner = 0; inner < outer; inner++) {   // Bubbling Up
+            if (arr[inner] > arr[inner + 1]) {      // Compare left item to right item
+                temp = arr[inner];                  // If left item is larger, swap
+                arr[inner] = arr[inner + 1];
+                arr[inner + 1] = temp;
+            }
+        }
+    }
 }
 
 // Merge Sort - Gary
@@ -123,7 +129,6 @@ void displayMenu() {
     cout << "Select a sorting algorithm: ";
 }
 
-// Validate User Input
 void validateInput(int& userChoice) {
 
     cin >> userChoice;
@@ -136,7 +141,6 @@ void validateInput(int& userChoice) {
     }
 }
 
-// Randomize List
 void randomize(int arr[], int size) {
     srand(time(NULL));
     for (int i = 0; i < size; i++) {
@@ -144,19 +148,23 @@ void randomize(int arr[], int size) {
     }
 }
 
-// Copy Array
 void copyArray(int original[], int copy[], int size) {
     for (int i = 0; i < size; i++) {
         copy[i] = original[i];
     }
 }
 
-// Print Array (first 50)
 void printArray(int arr[]) {
     cout << "\n-----Items in Array-----" << endl;
     for (int i = 0; i < 25; i++) {
         cout << "Array[" << i << "]: " << arr[i] << "\t\tArray[" << i+25 << "]: " << arr[i + 25] << endl;
     }
+}
+
+void printSortAnalysis(int arr[], double t1, double t2) {
+    cout << "\n-----***Array after Sort***-----" << endl;
+    printArray(arr);
+    cout << "Run Time: " << fixed << t2 - t1 << endl;
 }
 
 void ResetArray(int arr[], int copyarr[], int size) {
@@ -171,7 +179,6 @@ double TimeSnap() {
     return time_taken;
 }
 
-// Driver
 int main() {
     int const size = 1000;
     int numList[size];
@@ -194,13 +201,15 @@ int main() {
             t1 = TimeSnap();
             selectionSort(numList, size);
             t2 = TimeSnap();
-            cout << "\n-----***Array after Sort***-----" << endl;
-            printArray(numList);
-            cout << "Run Time: " << fixed << t2 - t1 << endl;
+            printSortAnalysis(numList, t1, t2);
           break;
           case 3: ; //Insertion sort gets called here
           break;
-          case 4: bubbleSort(numList); // added directly to main branch
+          case 4: 
+              t1 = TimeSnap();
+              bubbleSort(numList, size);
+              t2 = TimeSnap();
+              printSortAnalysis(numList, t1, t2);
           break;
           case 5: 
             t1 = TimeSnap();
