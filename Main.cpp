@@ -105,7 +105,7 @@ void mergeSort(int arr[], int l, int r)
         // Sort first and second halves 
         mergeSort(arr, l, m); 
         mergeSort(arr, m+1, r); 
-  
+
         merge(arr, l, m, r); 
     } 
 }
@@ -113,7 +113,6 @@ void mergeSort(int arr[], int l, int r)
 // Quick Sort - Brian
 
 // Heap Sort - Raf
-
 void maxHeapify(int nodeIndex, int heapArray[], int size) {
     int largest = nodeIndex;
     int left = (2 * nodeIndex) + 1;
@@ -131,11 +130,9 @@ void maxHeapify(int nodeIndex, int heapArray[], int size) {
         int temp = heapArray[nodeIndex];
         heapArray[nodeIndex] = heapArray[largest];
         heapArray[largest] = temp;
-
         maxHeapify(largest, heapArray, size);
     }
 }
-
 
 void heapSort(int arr[], int size) {
     // Turn array into a heap
@@ -256,7 +253,11 @@ int main() {
           break;
           case 6:; // Quick sort gets called here
           break;
-          case 7: heapSort(numList, size);// Heap sort gets called here
+          case 7: 
+            t1 = TimeSnap();
+            heapSort(numList, size);// Heap sort gets called here
+            t2 = TimeSnap();
+            printSortAnalysis(numList, t1, t2);
           break;
           case 8: 
             ResetArray(numList, numListBackup, size);
