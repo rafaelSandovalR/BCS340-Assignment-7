@@ -19,7 +19,26 @@ void selectionSort(int a[] , int size) {
   a[min] = temp;
   }
 }
-// Insertion Sort - Brian
+// Insertion Sort
+void insertionSort(int arr[], int n)
+{
+    int i, key, j;
+    for (i = 1; i < n; i++)
+    {
+        key = arr[i];
+        j = i - 1;
+ 
+        /* Move elements of arr[0..i-1], that are
+        greater than key, to one position ahead
+        of their current position */
+        while (j >= 0 && arr[j] > key)
+        {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
 
 // Bubble Sort - Raf
 void bubbleSort(int arr[], int size) {
@@ -110,7 +129,47 @@ void mergeSort(int arr[], int l, int r)
     } 
 }
 
-// Quick Sort - Brian
+// Quick Sort
+
+void swap(int* a, int* b)
+{
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+
+int partition (int arr[], int low, int high)
+{
+    int pivot = arr[high]; // pivot
+    int i = (low - 1); // Index of smaller element and indicates the right position of pivot found so far
+ 
+    for (int j = low; j <= high - 1; j++)
+    {
+        // If current element is smaller than the pivot
+        if (arr[j] < pivot)
+        {
+            i++; // increment index of smaller element
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+
+void quickSort(int arr[], int low, int high)
+{
+    if (low < high)
+    {
+        /* pi is partitioning index, arr[p] is now
+        at right place */
+        int pi = partition(arr, low, high);
+ 
+        // Separately sort elements before
+        // partition and after partition
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
 
 // Heap Sort - Raf
 void maxHeapify(int nodeIndex, int heapArray[], int size) {
@@ -237,7 +296,11 @@ int main() {
             t2 = TimeSnap();
             printSortAnalysis(numList, t1, t2);
           break;
-          case 3: ; //Insertion sort gets called here
+          case 3:
+            t1 = TimeSnap();
+            insertionSort(numList, size - 1);
+            t2 = TimeSnap();
+            printSortAnalysis(numList, t1, t2); 
           break;
           case 4: 
               t1 = TimeSnap();
@@ -251,11 +314,15 @@ int main() {
             t2 = TimeSnap();
             printSortAnalysis(numList, t1, t2);
           break;
-          case 6:; // Quick sort gets called here
+          case 6:
+            t1 = TimeSnap();
+            quickSort(numList, 0, size - 1);
+            t2 = TimeSnap();
+            printSortAnalysis(numList, t1, t2);
           break;
           case 7: 
             t1 = TimeSnap();
-            heapSort(numList, size);// Heap sort gets called here
+            heapSort(numList, size);
             t2 = TimeSnap();
             printSortAnalysis(numList, t1, t2);
           break;
