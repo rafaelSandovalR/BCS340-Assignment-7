@@ -248,14 +248,31 @@ void copyArray(int original[], int copy[], int size) {
 }
 
 void printArray(int arr[]) {
-    cout << "\n-----Items in Array-----" << endl;
+    cout << "---------------------------------------" << endl;
     for (int i = 0; i < 25; i++) {
         cout << "Array[" << i << "]: " << arr[i] << "\t\tArray[" << i+25 << "]: " << arr[i + 25] << endl;
     }
 }
 
-void printSortAnalysis(int arr[], double t1, double t2) {
-    cout << "\n-----***Array after Sort***-----" << endl;
+void printSortAnalysis(int arr[], double t1, double t2, int sortType) {
+    string type;
+
+    switch (sortType) {
+    case 1: type = "Selection";
+        break;
+    case 2: type = "Insertion";
+        break;
+    case 3: type = "Bubble";
+        break;
+    case 4: type = "Merge";
+        break;
+    case 5: type = "Quick";
+        break;
+    case 6: type = "Heap";
+        break;
+    }
+    cout << "---------------------------------------" << endl;
+    cout << "      Array after " << type <<"Sort" << endl;
     printArray(arr);
     cout << "Run Time: " << fixed << t2 - t1 << endl;
 }
@@ -264,6 +281,9 @@ void ResetArray(int arr[], int copyarr[], int size) {
   for (int i = 0; i < size; i++) {
         arr[i] = copyarr[i];
     }
+  printArray(arr);
+  cout << "\n             ARRAY RESET " << endl;
+  cout << "---------------------------------------" << endl;
 }
 
 double TimeSnap() {
@@ -273,7 +293,7 @@ double TimeSnap() {
 }
 
 int main() {
-    int const size = 1000;
+    int const size = 10000;
     int numList[size];
     int numListBackup[size];
     int userChoice = 0;
@@ -294,41 +314,40 @@ int main() {
             t1 = TimeSnap();
             selectionSort(numList, size);
             t2 = TimeSnap();
-            printSortAnalysis(numList, t1, t2);
+            printSortAnalysis(numList, t1, t2, 1);
           break;
           case 3:
             t1 = TimeSnap();
             insertionSort(numList, size - 1);
             t2 = TimeSnap();
-            printSortAnalysis(numList, t1, t2); 
+            printSortAnalysis(numList, t1, t2, 2); 
           break;
           case 4: 
               t1 = TimeSnap();
               bubbleSort(numList, size);
               t2 = TimeSnap();
-              printSortAnalysis(numList, t1, t2);
+              printSortAnalysis(numList, t1, t2, 3);
           break;
           case 5: 
             t1 = TimeSnap();
             mergeSort(numList, 0, size - 1);
             t2 = TimeSnap();
-            printSortAnalysis(numList, t1, t2);
+            printSortAnalysis(numList, t1, t2, 4);
           break;
           case 6:
             t1 = TimeSnap();
             quickSort(numList, 0, size - 1);
             t2 = TimeSnap();
-            printSortAnalysis(numList, t1, t2);
+            printSortAnalysis(numList, t1, t2, 5);
           break;
           case 7: 
             t1 = TimeSnap();
             heapSort(numList, size);
             t2 = TimeSnap();
-            printSortAnalysis(numList, t1, t2);
+            printSortAnalysis(numList, t1, t2, 6);
           break;
           case 8: 
             ResetArray(numList, numListBackup, size);
-            cout << "\n***ARRAY RESET***" << endl;
           break;
       }
     
