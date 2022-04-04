@@ -126,6 +126,39 @@ void mergeSort(int arr[], int l, int r)
 }
 
 // Quick Sort - Brian
+void swap(int* a, int* b)
+{
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+
+int partition(int arr[], int start, int end) {
+    int pivot = arr[end];
+    int i = start - 1;
+
+    for (int j = start; j <= end - 1; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+
+    }
+    swap(&arr[i + 1], &arr[end]);
+    
+    return(i + 1);
+
+}
+
+
+void quickSort(int arr[], int start, int end) {
+    if (start < end) {
+        int index = partition(arr, start, end);
+        quickSort(arr, start, index - 1);
+        quickSort(arr, index + 1, end);
+    }
+}
+
 
 // Heap Sort - Raf
 void maxHeapify(int nodeIndex, int heapArray[], int size) {
@@ -270,7 +303,11 @@ int main() {
             t2 = TimeSnap();
             printSortAnalysis(numList, t1, t2);
           break;
-          case 6:; // Quick sort gets called here
+          case 6:
+              t1 = TimeSnap();
+              quickSort(numList, 0, size-1); // Quick sort gets called here
+              t2 = TimeSnap();
+              printSortAnalysis(numList, t1, t2);
           break;
           case 7: 
             t1 = TimeSnap();
