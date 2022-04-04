@@ -20,6 +20,21 @@ void selectionSort(int a[] , int size) {
   }
 }
 // Insertion Sort - Brian
+void insertionSort(int arr[], int size) {
+    int index;
+    int j;
+    for (int i = 1; i < size; i++) {
+        index = arr[i];
+        j = i - 1;
+
+        //Move elements that are greater than index to the right one
+        while (j >= 0 && arr[j] > index) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = index;
+    }
+}
 
 // Bubble Sort - Raf
 void bubbleSort(int arr[], int size) {
@@ -237,7 +252,11 @@ int main() {
             t2 = TimeSnap();
             printSortAnalysis(numList, t1, t2);
           break;
-          case 3: ; //Insertion sort gets called here
+          case 3: 
+              t1 = TimeSnap();
+              insertionSort(numList, size);
+              t2 = TimeSnap();
+              printSortAnalysis(numList, t1, t2);
           break;
           case 4: 
               t1 = TimeSnap();
